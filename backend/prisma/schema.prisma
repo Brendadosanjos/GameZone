@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id          Int       @id @default(autoincrement())
+  name        String
+  cpf         String    @unique
+  email       String    @unique
+  celular     String
+  enderecoId  Int       @unique
+  endereco    Endereco  @relation(fields: [enderecoId], references: [id])
+}
+
+model Categoria {
+  id        Int      @id @default(autoincrement())
+  descricao String
+  produtos  Produto[] // Relacionamento oposto adicionado
+}
+
+model Status {
+  id       Int       @id @default(autoincrement())
+  nome     String
+  pedidos  Pedidos[] // Relacionamento oposto adicionado
+}
+
+model Genero {
+  id       Int       @id @default(autoincrement())
+  nome     String
+  produtos Produto[]  // Relacionamento oposto adicionado
+}
+
+model Promocao {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  percentagem Float
+  produtos    Produto[] // Relacionamento oposto adicionado
+}
+
+model Marca {
+  id       Int       @id @default(autoincrement())
+  nome     String
+  produtos Produto[]  // Relacionamento oposto adicionado
+}
+
+model Estado {
+  id       Int       @id @default(autoincrement())
+  nome     String
+  produtos Produto[]  // Relacionamento oposto adicionado
+}
+
+model Cupom {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  percentagem Float
+  pedidos     Pedidos[] // Relacionamento oposto adicionado
+}
+
+model FormaPagamento {
+  id   Int    @id @default(autoincrement())
+  nome String
+}
+
+model Endereco {
+  id          Int      @id @default(autoincrement())
+  rua         String
+  bairro      String
+  cidade      String
+  cep         String
+  complemento String?
+  usuario     Usuario?  // Relacionamento oposto adicionado
+}
+
+model Pedidos {
+  id         Int      @id @default(autoincrement())
+  descricao  String
+  statusId   Int
+  precoTotal Float
+  cupomId    Int?
+
+  status Status @relation(fields: [statusId], references: [id])
+  cupom  Cupom? @relation(fields: [cupomId], references: [id])
+}
+
+model Produto {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  descricao   String
+  categoriaId Int
+  generoId    Int
+  estadoId    Int
+  preco       Float
+  promocaoId  Int?
+  marcaId     Int
+
+  categoria Categoria @relation(fields: [categoriaId], references: [id])
+  genero    Genero    @relation(fields: [generoId], references: [id])
+  estado    Estado    @relation(fields: [estadoId], references: [id])
+  promocao  Promocao? @relation(fields: [promocaoId], references: [id])
+  marca     Marca     @relation(fields: [marcaId], references: [id])
+}
