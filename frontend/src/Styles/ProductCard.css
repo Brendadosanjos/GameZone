@@ -1,0 +1,22 @@
+.custom-card {
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .custom-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .custom-card .card-img-top {
+    height: 180px;
+    object-fit: contain;
+  }
+  
+  .text-price {
+    color: #333;
+    font-weight: bold;
+  }

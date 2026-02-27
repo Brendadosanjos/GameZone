@@ -1,0 +1,108 @@
+.breadcrumb {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.product-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-image-section {
+  flex: 1;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.thumbnail-container {
+  display: flex;
+  gap: 5px;
+}
+
+.thumbnail {
+  width: 60px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnail.active {
+  border-color: #000;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.product-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.product-category {
+  font-size: 14px;
+  color: gray;
+}
+
+.rating {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.product-price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: red;
+}
+
+.size-options {
+  display: flex;
+  gap: 10px;
+}
+
+.size-button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.size-button.selected {
+  background: black;
+  color: white;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.color-option.selected {
+  border-color: black;
+}
+
+.buy-button {
+  background: rgb(40, 108, 245);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 10px;
+}

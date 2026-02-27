@@ -1,0 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border-style: none;
+}
+
+.sectionsTitle {
+    margin: 5% 0px 2% 0px;
+    display: flex;
+    justify-content: center;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.sectionsImages {
+    gap: 5%;
+    margin-top: 2%;
+    margin-bottom: 10%;
+    height: auto;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionsImages a {
+    width: 5%;  
+    height: auto;  
+}
+
+.sectionsImages img {
+    width: 100%;  
+    height: auto;  
+}

@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-style: none;
+  font-family: Inter;
+}
+.colectionText{
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 50px 0px 0px 17%;
+  color:#474747;
+}
+
+.collection-highlights-container {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  gap: 2%;
+  align-items: center;
+}
+.collection-highlights p {
+  margin: 0;
+  padding: 0;
+}
+
+.collection-highlights {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1%;
+  width: 21.094vw;
+  height: 25.1vh;
+  background-color: #d8e3f2;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 200%;
+  background-image: url("blusaDestaque.png");
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.collection-highlights button.btn.btn-primary {
+  width: 7.969vw;
+  height: 4.8vh;
+  background-color: #f5f5f5;
+  color: #2074c9;
+  border-style: none;
+}
+
+.discountHighlights {
+  display: flex;
+  padding: 50px;
+  height: 3.2vh;
+  width: 6vw;
+  background-color: #e7ff86;
+  border-radius: 29px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  justify-content: center;
+  align-items: center;
+}
