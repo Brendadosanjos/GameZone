@@ -1,23 +1,28 @@
 import { useEffect, useState } from "react";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function ProductHigh() {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(
-          "https://6792c38acf994cc6804b011b.mockapi.io/products/produtos"
-        );
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        alert(`Erro ao buscar produtos: ${error}`);
-      }
-    };
+useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "games"));
 
-    fetchProducts();
-  }, []);
+      const gamesList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setProducts(gamesList);
+    } catch (error) {
+      alert(`Erro ao buscar produtos: ${error}`);
+    }
+  };
+
+  fetchProducts();
+}, []);
 
   return (
     <>
@@ -37,22 +42,22 @@ export default function ProductHigh() {
         <div className="grid grid-rows-2 grid-cols-4 gap-6">
           {products.map((produto) => (
             <div key={produto.id} className="mr-[24px] mb-[40px] ">
-              <div className="relative w-[300px] rounded-[4px] bg-white shadow-custom">
-                <img
-                  src={produto.imagem || "goodofwar.jpg"}
-                  alt={produto.nome}
-                  className=""
-                />
-              </div>
+<div className="relative w-[250px] h-[250px] rounded-[4px] bg-white shadow-custom flex items-center justify-center overflow-hidden">
+  <img
+    src={produto.imageUrl}
+    alt={produto.title}
+    className="max-h-full max-w-full object-contain"
+  />
+</div>
               <div>
                 <span className="font-bold text-[12px] leading-[24px] text-[#8F8F8F]">
-                  {produto.categoria || "Jogo"}
+                  {produto.category}
                 </span>
-                <h2 className="text-grayCustom">{produto.nome}</h2>
+                <h2 className="text-grayCustom">{produto.title}</h2>
 
                 <div className="flex gap-2">
                   <p className="text-[#000000]">
-                    R${produto.preco|| "200"}
+                    R${produto.price}
                   </p>
                 </div>
               </div>
