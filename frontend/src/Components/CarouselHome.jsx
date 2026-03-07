@@ -1,44 +1,78 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import "../Styles/CarouselHome.css";
-// Import Swiper styles
-import { Button } from "react-bootstrap";
+import { Pagination, Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+
+const slides = [
+  {
+    tag: "Melhores ofertas personalizadas",
+    title: "Queima de\nEstoque 🔥",
+    subtitle: "Veja as ofertas que estão em destaque pra hoje",
+    buttonText: "Ver ofertas",
+    buttonTo: "/productlist",
+    image: "games.png",
+    bg: "#F5F5F5",
+  },
+  {
+    tag: "Jogos com desconto",
+    title: "Jogos para\nXbox",
+    subtitle: "Confira as novidades e os jogos mais populares",
+    buttonText: "Ver oferta",
+    buttonTo: "/productlist",
+    image: "xbox.png",
+    bg: "#EEF4FF",
+  },
+];
+
 export default function CarrouselHome() {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-        <SwiperSlide>
-          <div className="carrouselContainer">
-            <div className="textContainer">
-              <p className="text1">Melhores ofertas personalizadas</p>
-              <p className="text2">Queima de Estoque🔥</p>
-              <p className="text3">Veja as ofertas que estão em destaque pra hoje</p>
-              <Button className="offerButton">Ver ofertas</Button>
+    <div className="w-full px-[100px] py-[40px]">
+      <Swiper
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        modules={[Pagination, Autoplay]}
+        className="rounded-[20px] overflow-hidden"
+      >
+        {slides.map((slide, i) => (
+          <SwiperSlide key={i}>
+            <div
+              className="flex items-center justify-between px-[60px] py-[50px] min-h-[340px]"
+              style={{ backgroundColor: slide.bg }}
+            >
+              {/* Text */}
+              <div className="flex flex-col gap-4 max-w-[420px]">
+                <span className="inline-block bg-[#E7FF86] text-black font-bold text-[12px] px-4 py-1 rounded-full uppercase tracking-widest w-fit">
+                  {slide.tag}
+                </span>
+                <h2 className="text-[#1F1F1F] font-extrabold text-[52px] leading-[1.1] whitespace-pre-line">
+                  {slide.title}
+                </h2>
+                <p className="text-[#474747] text-[16px] leading-relaxed">
+                  {slide.subtitle}
+                </p>
+                <button
+                  onClick={() => navigate(slide.buttonTo)}
+                  className="w-fit bg-[#2074c9] hover:bg-[#1a5faa] transition-colors duration-200 text-white font-bold text-[14px] px-8 py-3 rounded-[10px]"
+                >
+                  {slide.buttonText}
+                </button>
+              </div>
+
+              {/* Image */}
+              <div className="flex items-center justify-center">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="max-h-[260px] object-contain drop-shadow-xl"
+                />
+              </div>
             </div>
-            <div>
-              <img src="games.png" alt="imagem games" width={300} />
-              <img src="brilhinho.png" alt="" className="brilhinho"/>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="carrouselContainer">
-            <div className="textContainer">
-              <p className="text1">Jogos com desconto</p>
-              <p className="text2">Xbox</p>
-              <p className="text3">Confira as novidades e os jogos mais populares</p>
-              <Button className="offerButton">Ver oferta</Button>
-            </div>
-            <div>
-              <img src="xbox.png" alt="imagem xbox" width={280}  />
-              <img src="brilhinho.png" alt="" className="brilhinho"/>
-            </div>
-          </div>
-        </SwiperSlide>
+          </SwiperSlide>
+        ))}
       </Swiper>
-    </>
+    </div>
   );
 }

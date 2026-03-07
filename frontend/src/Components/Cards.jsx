@@ -1,81 +1,67 @@
-import "../Styles/Cards.css";
+import { useNavigate } from "react-router-dom";
+
+const promos = [
+  {
+    badge: "30% off",
+    title: "Promoção\nNintendo",
+    image: "mario.png",
+    imageClass: "absolute bottom-0 right-6 w-[110px]",
+    to: "/productlist",
+  },
+  {
+    badge: "30% off",
+    title: "Promoção\nPlaystation",
+    image: "play2.png",
+    imageClass: "absolute bottom-0 right-4 w-[160px]",
+    to: "/productlist",
+  },
+  {
+    badge: "30% off",
+    title: "Promoção\nXBOX",
+    image: "controlexbox.png",
+    imageClass: "absolute bottom-0 right-2 w-[200px]",
+    to: "/productlist",
+  },
+];
 
 export default function Cards() {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <h2 className="text-[#474747] mb-[20px] font-bold text-[24px] ml-[100px] mt-[38px]">
+    <div className="px-[100px] mb-[80px]">
+      <h2 className="text-[#1F1F1F] font-extrabold text-[26px] mb-[28px]">
         Coleção em destaque
       </h2>
 
-      <div className="flex justify-center gap-[34px] mb-[100px]">
+      <div className="flex justify-between gap-6">
+        {promos.map((promo, i) => (
+          <div
+            key={i}
+            className="relative rounded-[16px] bg-[#D8E3F2] pl-[28px] pt-[30px] pb-[28px] flex-1 min-h-[260px] overflow-hidden transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
+          >
+            {/* Badge */}
+            <span className="inline-block bg-[#E7FF86] text-black font-bold text-[12px] px-4 py-1 rounded-full uppercase tracking-wide mb-3">
+              {promo.badge}
+            </span>
 
-        <div className="relative rounded-[8px] bg-[#D8E3F2] pl-[30px] pt-[34px] w-[400px] h-[300px]">
+            {/* Title */}
+            <h2 className="text-[#1F1F1F] font-extrabold text-[28px] leading-[1.2] whitespace-pre-line mb-5">
+              {promo.title}
+            </h2>
 
-          <h6 className="text-[16px] font-bold uppercase leading-[32px] px-[15px] rounded-[20px] inline-block bg-[#E7FF86] mb-[10px]">
-            30% off
-          </h6>
+            {/* Button */}
+            <button
+              onClick={() => navigate(promo.to)}
+              className="bg-[#2074c9] hover:bg-[#1a5faa] transition-colors duration-200 text-white font-bold text-[13px] px-6 py-2 rounded-[8px] z-10 relative"
+            >
+              Comprar
+            </button>
 
-          <h2 className="text-[32px] font-bold mb-[20px]">
-            Promoção <br /> Nintendo
-          </h2>
-
-          <button className="rounded-[8px] bg-[#2074c9] text-white font-bold text-[14px] w-[150px] h-[40px]">
-            Comprar
-          </button>
-
-          <img
-            src="mario.png"
-            alt="Mario"
-            className="absolute bottom-0 right-6 w-[120px]"
-          />
-
-        </div>
-
-        <div className="relative rounded-[8px] bg-[#D8E3F2] pl-[30px] pt-[34px] w-[400px] h-[300px]">
-
-          <h6 className="text-[16px] font-bold uppercase leading-[32px] px-[15px] rounded-[20px] inline-block bg-[#E7FF86] mb-[10px]">
-            30% off
-          </h6>
-
-          <h2 className="text-[32px] font-bold mb-[20px]">
-            Promoção <br /> Playstation
-          </h2>
-
-          <button className="rounded-[8px] bg-[#2074c9] text-white font-bold text-[14px] w-[150px] h-[40px]">
-            Comprar
-          </button>
-
-          <img
-            src="play2.png"
-            alt="Playstation"
-            className="absolute bottom-0 right-4 w-[180px]"
-          />
-
-        </div>
-
-        <div className="relative rounded-[8px] bg-[#D8E3F2] pl-[30px] pt-[34px] w-[400px] h-[300px]">
-
-          <h6 className="text-[16px] font-bold uppercase leading-[32px] px-[15px] rounded-[20px] inline-block bg-[#E7FF86] mb-[10px]">
-            30% off
-          </h6>
-
-          <h2 className="text-[32px] font-bold mb-[20px]">
-            Promoção <br /> XBOX
-          </h2>
-
-          <button className="rounded-[8px] bg-[#2074c9] text-white font-bold text-[14px] w-[150px] h-[40px]">
-            Comprar
-          </button>
-
-          <img
-            src="controlexbox.png"
-            alt="Controle Xbox"
-            className="absolute bottom-0 right-2 w-[220px]"
-          />
-
-        </div>
-
+            {/* Image */}
+            <img src={promo.image} alt={promo.title} className={promo.imageClass} />
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }

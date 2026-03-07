@@ -1,5 +1,6 @@
 import "boxicons";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "../Styles/NavBar.css";
 
 export default function NavBar() {
@@ -7,16 +8,13 @@ export default function NavBar() {
     <>
       <div className="flex flex-col pt-[34px] px-[100px] pb-[29px]">
 
-        {/* TOPO */}
         <div className="flex flex-wrap items-center justify-between gap-4">
 
-          {/* LOGO */}
           <div className="flex items-center gap-[5px] text-[#2074c9] font-bold text-[28px] md:text-[36px]">
             <img src="logo.png" alt="logo-navBar" width={60} />
             <h1 className="whitespace-nowrap">GameZone</h1>
           </div>
 
-          {/* BUSCA */}
           <div className="relative flex-1 min-w-[250px] max-w-[500px]">
             <input
               type="text"
@@ -29,7 +27,6 @@ export default function NavBar() {
             ></box-icon>
           </div>
 
-          {/* LOGIN / CARRINHO */}
           <div className="flex items-center gap-4">
 
             <a
@@ -53,37 +50,27 @@ export default function NavBar() {
           </div>
 
         </div>
+        <div className="flex flex-wrap gap-[32px] mt-[40px] ">
 
-        {/* MENU */}
-        <div className="flex flex-wrap gap-[32px] mt-[40px] mb-[21px]">
-
-          <a
-            className="text-[#474747] hover:text-[#2074c9]"
-            href="#"
-          >
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/">
             Home
-          </a>
+          </Link>
 
-          <a
-            className="text-[#474747] hover:text-[#2074c9]"
-            href="#"
-          >
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/assinatura">
+            Assinatura
+          </Link>
+
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/produtos">
             Produtos
-          </a>
+          </Link>
 
-          <a
-            className="text-[#474747] hover:text-[#2074c9]"
-            href="#"
-          >
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/categorias">
             Categorias
-          </a>
+          </Link>
 
-          <a
-            className="text-[#474747] hover:text-[#2074c9]"
-            href="#"
-          >
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/pedidos">
             Meus pedidos
-          </a>
+          </Link>
 
         </div>
 

@@ -12,7 +12,7 @@ export default function Footer() {
             </div>
             <div className="footer-text">
               <p>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint repellat magni corrupti ducimus minima perferendis voluptatibus laudantium.
+               Bem-vindo ao GameZone , o lugar perfeito para quem vive o universo dos games. Aqui você encontra os melhores títulos para todas as plataformas. 
               </p>
             </div>
             <div className="footer-icons">

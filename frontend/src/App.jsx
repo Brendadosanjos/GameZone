@@ -4,6 +4,9 @@ import "./App.css";
 import Home from "./Pages/Home";
 import NotFound from "./Pages/NotFound";
 import ProductList from "./Pages/ProductListPage";
+import ProductPage from "./Pages/ProductPage";
+import SubscriptionPage from "./Pages/SubscriptionPage";
+
 
 function App() {
   return (
@@ -12,7 +15,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productlist" element={<ProductList />} />
-          <Route path="/" element={<NotFound />} />
+          <Route path="/produto/:id" element={<ProductPage />} />
+          <Route path="/assinatura" element={<SubscriptionPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>
