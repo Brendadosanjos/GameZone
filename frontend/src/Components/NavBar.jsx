@@ -43,14 +43,16 @@ export default function NavBar() {
               Entrar
             </Button>
 
-            <button>
-              <img src="Buy.png" width={28} />
-            </button>
+            {/* CARRINHO */}
+            <Link to="/cart">
+              <img src="Buy.png" width={28} alt="Carrinho" />
+            </Link>
 
           </div>
 
         </div>
-        <div className="flex flex-wrap gap-[32px] mt-[40px] ">
+
+        <div className="flex flex-wrap gap-[32px] mt-[40px]">
 
           <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/">
             Home
