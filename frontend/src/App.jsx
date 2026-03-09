@@ -6,6 +6,7 @@ import NotFound from "./Pages/NotFound";
 import ProductList from "./Pages/ProductListPage";
 import ProductPage from "./Pages/ProductPage";
 import SubscriptionPage from "./Pages/SubscriptionPage";
+import CategoryPage from "./Pages/CategoryPage";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/productlist" element={<ProductList />} />
           <Route path="/produto/:id" element={<ProductPage />} />
           <Route path="/assinatura" element={<SubscriptionPage />} />
+          <Route path="/categorias" element={<CategoryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

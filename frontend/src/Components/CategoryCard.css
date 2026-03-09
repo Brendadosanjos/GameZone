@@ -1,0 +1,44 @@
+.category-card {
+  background-color: #f8faff; 
+  border-radius: 12px;
+  overflow: hidden; /* IMPORTANTE: Faz a imagem respeitar o arredondado do card */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0; /* Removemos o padding geral para a imagem encostar nas bordas */
+  transition: transform 0.3s ease;
+}
+
+.category-image-wrapper {
+  width: 100%; /* Garante que o container da imagem use toda a largura */
+  height: 180px; /* Defina uma altura fixa para padronizar todos os cards */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0ebf3; /* Cor de fundo caso a imagem demore a carregar */
+}
+
+.category-image-wrapper img {
+  width: 100%; /* Faz a imagem esticar até a borda */
+  height: 100%; /* Faz a imagem preencher a altura do container */
+  object-fit: cover; /* Faz a imagem preencher o espaço sem distorcer, cortando as sobras */
+}
+
+.category-info {
+  padding: 20px; /* Adicionamos o padding apenas no texto, não no card todo */
+  text-align: center;
+}
+
+.category-info h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.category-link {
+  color: #3b82f6; /* Azul do link */
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
