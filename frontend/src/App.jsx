@@ -8,6 +8,8 @@ import ProductList from "./Pages/ProductListPage";
 import ProductPage from "./Pages/ProductPage";
 import SubscriptionPage from "./Pages/SubscriptionPage";
 import Cart from "./Pages/Cart";
+import Orders from "./Pages/Orders";
+
 
 
 function App() {
@@ -20,7 +22,8 @@ function App() {
           <Route path="/produto/:id" element={<ProductPage />} />
           <Route path="/assinatura" element={<SubscriptionPage />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/carrinho" element={<Cart />} />
+          <Route path="/pedidos" element={<Orders />} />
         </Routes>
       </Router>
     </>

@@ -15,9 +15,9 @@ export default function CartItem({ product, onRemove }) {
       </div>
 
       <div className="cart-actions">
-        <button className="btn-remove" onClick={onRemove}>
-          Remover
-        </button>
+        <button onClick={onRemove} className="remove-btn">
+  Remover
+</button>
       </div>
 
     </div>

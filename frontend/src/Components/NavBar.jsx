@@ -44,7 +44,7 @@ export default function NavBar() {
             </Button>
 
             {/* CARRINHO */}
-            <Link to="/cart">
+            <Link to="/carrinho">
               <img src="Buy.png" width={28} alt="Carrinho" />
             </Link>
 

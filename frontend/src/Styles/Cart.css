@@ -68,3 +68,7 @@
 .btn-clear-cart:hover {
   background-color: #d9363e;
 }
+
+.cart-container{
+  min-height:70vh;
+}
