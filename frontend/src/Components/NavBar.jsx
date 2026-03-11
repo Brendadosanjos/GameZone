@@ -29,14 +29,16 @@ export default function NavBar() {
 
           <div className="flex items-center gap-4">
 
-            <a
+            <Link
               className="text-[#474747] underline hover:text-[#2074c9]"
-              href="#"
+              to="/cadastro"
             >
               Cadastre-se
-            </a>
+            </Link>
 
             <Button
+              as={Link}
+              to="/login"
               className="w-[100px] no-underline bg-[#2074c9] border-none hover:bg-[#2074c9] font-bold text-[14px]"
               variant="primary"
             >
@@ -60,7 +62,7 @@ export default function NavBar() {
             Assinatura
           </Link>
 
-          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/produtos">
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/productlist">
             Produtos
           </Link>
 
