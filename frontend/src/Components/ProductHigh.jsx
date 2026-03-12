@@ -46,7 +46,6 @@ export default function ProductHigh() {
         </a>
       </div>
 
-      {/* Grid */}
       {loading ? (
         <div className="flex justify-center items-center h-[300px]">
           <p className="text-[#474747] text-[16px]">Carregando jogos...</p>
@@ -59,14 +58,12 @@ export default function ProductHigh() {
               onClick={() => navigate(`/produto/${produto.id}`)}
               className="cursor-pointer group"
             >
-              {/* Image box */}
               <div className="relative w-full aspect-square rounded-[12px] bg-white shadow-sm flex items-center justify-center overflow-hidden mb-3 transition-shadow duration-200 group-hover:shadow-md">
                 <img
                   src={produto.imageUrl}
                   alt={produto.title}
                   className="max-h-[85%] max-w-[85%] object-contain transition-transform duration-200 group-hover:scale-105"
                 />
-                {/* Console badge */}
                 {produto.console && (
                   <span className="absolute top-3 left-3 bg-[#F9F8FE] text-[#474747] text-[10px] font-bold px-2 py-1 rounded-full border border-[#e0e0e0]">
                     {produto.console}
@@ -74,7 +71,6 @@ export default function ProductHigh() {
                 )}
               </div>
 
-              {/* Info */}
               <div className="px-1">
                 <span className="text-[#8F8F8F] text-[11px] font-bold uppercase tracking-wide">
                   {produto.category}

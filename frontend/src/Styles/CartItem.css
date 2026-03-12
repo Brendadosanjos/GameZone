@@ -1,0 +1,33 @@
+.cart-item{
+  display:flex;
+  gap:20px;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+  align-items:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+
+.cart-item img{
+  width:120px;
+  border-radius:8px;
+}
+
+.cart-info{
+  flex:1;
+}
+
+.cart-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.btn-remove{
+  background:#eee;
+  border:none;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
+}

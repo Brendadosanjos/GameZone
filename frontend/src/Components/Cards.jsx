@@ -6,21 +6,21 @@ const promos = [
     title: "Promoção\nNintendo",
     image: "mario.png",
     imageClass: "absolute bottom-0 right-6 w-[110px]",
-    to: "/productlist",
+    to: "/productlist?console=Nintendo",
   },
   {
     badge: "30% off",
     title: "Promoção\nPlaystation",
     image: "play2.png",
     imageClass: "absolute bottom-0 right-4 w-[160px]",
-    to: "/productlist",
+    to: "/productlist?console=Playstation",
   },
   {
     badge: "30% off",
     title: "Promoção\nXBOX",
     image: "controlexbox.png",
     imageClass: "absolute bottom-0 right-2 w-[200px]",
-    to: "/productlist",
+    to: "/productlist?console=Xbox",
   },
 ];
 

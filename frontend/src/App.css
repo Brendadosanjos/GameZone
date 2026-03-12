@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border-style: none;
-    font-family: Inter, sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter, sans-serif;
 }
+

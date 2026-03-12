@@ -1,0 +1,108 @@
+.orders-container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+.orders-title{
+  font-weight:bold;
+  font-size:35px;
+  margin-bottom:30px;
+}
+
+.orders-list{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.order-card{
+  background:white;
+  border-radius:10px;
+  padding:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+
+.order-header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+.order-items{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.order-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.order-item img{
+  width:80px;
+  height:100px;
+  object-fit:cover;
+  border-radius:6px;
+}
+
+.order-item-info{
+  display:flex;
+  flex-direction:column;
+}
+
+.order-item-title{
+  font-weight:600;
+}
+
+.order-item-price{
+  color:#2f6fd6;
+  font-weight:600;
+}
+
+.order-card{
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.order-title{
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.order-total{
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.remove-btn{
+  margin-top:10px;
+  background:#e53935;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.remove-btn:hover{
+  background:#c62828;
+}
+
+.no-orders{
+  text-align:center;
+  margin-top:60px;
+  color:#666;
+}
+
+.no-orders h2{
+  font-size:28px;
+  margin-bottom:10px;
+}

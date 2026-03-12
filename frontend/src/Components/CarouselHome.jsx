@@ -42,7 +42,6 @@ export default function CarrouselHome() {
               className="flex items-center justify-between px-[60px] py-[50px] min-h-[340px]"
               style={{ backgroundColor: slide.bg }}
             >
-              {/* Text */}
               <div className="flex flex-col gap-4 max-w-[420px]">
                 <span className="inline-block bg-[#E7FF86] text-black font-bold text-[12px] px-4 py-1 rounded-full uppercase tracking-widest w-fit">
                   {slide.tag}
@@ -61,7 +60,6 @@ export default function CarrouselHome() {
                 </button>
               </div>
 
-              {/* Image */}
               <div className="flex items-center justify-center">
                 <img
                   src={slide.image}
