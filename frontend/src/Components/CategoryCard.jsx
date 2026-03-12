@@ -1,7 +1,6 @@
 import React from 'react';
-import './CategoryCard.css';
+import "../Styles/CategoryCard.css";
 
-// Recebe 'title' (ex: Nintendo) e 'image' (a foto do console) por props
 const CategoryCard = ({ title, image }) => {
   return (
     <div className="category-card">

@@ -24,7 +24,7 @@
 }
 
 .text-orange {
-  color: #f97316; /* Cor laranja do print */
+  color: #f97316;
 }
 
 .banner-subtitle {
@@ -41,7 +41,7 @@
 }
 
 .banner-image img {
-  height: 100%; /* Faz a imagem ocupar toda a altura disponível */
-  width: auto;   /* Mantém a proporção */
-  object-fit: cover; /* Ou 'contain' se você não quiser que corte nada */
+  height: 100%;
+  width: auto;
+  object-fit: cover;
 }

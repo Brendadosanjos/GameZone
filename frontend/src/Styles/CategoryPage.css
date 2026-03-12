@@ -14,7 +14,6 @@
 
 .categories-grid {
   display: grid;
-  /* Isso cria 4 colunas iguais, mas se a tela for pequena, ele ajusta sozinho */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }

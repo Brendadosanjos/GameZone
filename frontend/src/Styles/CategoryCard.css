@@ -1,0 +1,44 @@
+.category-card {
+  background-color: #f8faff; 
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  transition: transform 0.3s ease;
+}
+
+.category-image-wrapper {
+  width: 100%; 
+  height: 180px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0ebf3; 
+}
+
+.category-image-wrapper img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+
+.category-info {
+  padding: 20px; 
+  text-align: center;
+}
+
+.category-info h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.category-link {
+  color: #3b82f6; 
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}

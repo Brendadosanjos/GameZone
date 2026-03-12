@@ -4,7 +4,7 @@ import Footer from '../Components/Footer';
 
 import BannerCategorias from '../Components/BannerCategorias';
 import CategoryCard from '../Components/CategoryCard';
-import './CategoryPage.css';
+import '../Styles/CategoryPage.css';
 
 import imgNintendo from '../assets/nintendo-categoria.jpg';
 import imgPS5 from '../assets/play-categoria.png';

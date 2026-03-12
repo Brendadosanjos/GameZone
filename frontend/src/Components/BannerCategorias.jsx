@@ -1,5 +1,5 @@
 import React from 'react';
-import './BannerCategorias.css';
+import '../Styles/BannerCategorias.css';
 import imgbanner from '../assets/banner-categoria.png';
 
 const BannerCategorias = () => {
