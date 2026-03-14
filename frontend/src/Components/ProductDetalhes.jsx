@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 import { db } from "../firebase";
 import { doc, getDoc, collection, query, where, getDocs, addDoc } from "firebase/firestore";
-
-// Substituir por auth.currentUser.uid quando implementar Firebase Auth
-const USER_ID = "user1";
 
 export default function ProductDetalhes() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState([]);
@@ -20,19 +19,10 @@ export default function ProductDetalhes() {
       try {
         const docRef = doc(db, "games", id);
         const docSnap = await getDoc(docRef);
-
-        if (!docSnap.exists()) {
-          navigate("/404");
-          return;
-        }
-
+        if (!docSnap.exists()) { navigate("/404"); return; }
         const data = { id: docSnap.id, ...docSnap.data() };
         setProduct(data);
-
-        const q = query(
-          collection(db, "games"),
-          where("category", "==", data.category)
-        );
+        const q = query(collection(db, "games"), where("category", "==", data.category));
         const relSnap = await getDocs(q);
         const relList = relSnap.docs
           .map((d) => ({ id: d.id, ...d.data() }))
@@ -45,14 +35,14 @@ export default function ProductDetalhes() {
         setLoading(false);
       }
     }
-
     fetchProduct();
   }, [id]);
 
   async function handleAddToCart() {
+    if (!user?.uid) return;
     try {
       await addDoc(collection(db, "cart"), {
-        userId: USER_ID,
+        userId: user.uid,
         gameId: product.id,
         title: product.title,
         price: product.price,
@@ -91,16 +81,11 @@ export default function ProductDetalhes() {
       <div className="flex gap-[60px] mb-[80px]">
         <div className="flex-1 max-w-[480px]">
           <div className="bg-white rounded-[16px] shadow-sm flex items-center justify-center p-8 aspect-square">
-            <img
-              src={product.imageUrl}
-              alt={product.title}
-              className="max-h-full max-w-full object-contain"
-            />
+            <img src={product.imageUrl} alt={product.title} className="max-h-full max-w-full object-contain" />
           </div>
         </div>
 
         <div className="flex-1 flex flex-col gap-5">
-
           <div className="flex items-center gap-2">
             {product.console && (
               <span className="bg-[#D8E3F2] text-[#2074c9] font-bold text-[12px] px-3 py-1 rounded-full">
@@ -112,10 +97,7 @@ export default function ProductDetalhes() {
             </span>
           </div>
 
-          {/* Título */}
-          <h1 className="text-[#1F1F1F] font-extrabold text-[32px] leading-tight">
-            {product.title}
-          </h1>
+          <h1 className="text-[#1F1F1F] font-extrabold text-[32px] leading-tight">{product.title}</h1>
 
           {product.releaseYear && (
             <p className="text-[#8F8F8F] text-[13px]">
@@ -125,10 +107,7 @@ export default function ProductDetalhes() {
 
           <div className="flex items-baseline gap-3">
             <span className="text-[#2074c9] font-extrabold text-[36px]">
-              R${" "}
-              {Number(product.price).toLocaleString("pt-BR", {
-                minimumFractionDigits: 2,
-              })}
+              R$ {Number(product.price).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
             </span>
             <span className="text-[#8F8F8F] text-[14px]">à vista</span>
           </div>
@@ -136,9 +115,7 @@ export default function ProductDetalhes() {
           {product.stock !== undefined && (
             <p className="text-[13px]">
               {product.stock > 0 ? (
-                <span className="text-green-600 font-semibold">
-                  ✓ Em estoque ({product.stock} unidades)
-                </span>
+                <span className="text-green-600 font-semibold">✓ Em estoque ({product.stock} unidades)</span>
               ) : (
                 <span className="text-red-500 font-semibold">✗ Fora de estoque</span>
               )}
@@ -152,24 +129,14 @@ export default function ProductDetalhes() {
           )}
 
           <div className="flex gap-3 mt-2">
-            <button
-              onClick={handleAddToCart}
-              disabled={product.stock === 0}
+            <button onClick={handleAddToCart} disabled={product.stock === 0}
               className={`flex-1 h-[52px] rounded-[10px] font-bold text-[15px] transition-all duration-200
-                ${product.stock === 0
-                  ? "bg-[#E0E0E0] text-[#999] cursor-not-allowed"
-                  : added
-                  ? "bg-green-500 text-white"
-                  : "bg-[#2074c9] hover:bg-[#1a5faa] text-white"
-                }`}
-            >
+                ${product.stock === 0 ? "bg-[#E0E0E0] text-[#999] cursor-not-allowed"
+                  : added ? "bg-green-500 text-white"
+                  : "bg-[#2074c9] hover:bg-[#1a5faa] text-white"}`}>
               {added ? "✓ Adicionado ao carrinho!" : product.stock === 0 ? "Fora de estoque" : "Adicionar ao carrinho"}
             </button>
-
-            <button
-              className="h-[52px] w-[52px] rounded-[10px] border-2 border-[#E8E8E8] flex items-center justify-center text-[20px] hover:border-[#2074c9] transition-colors duration-200"
-              title="Favoritar"
-            >
+            <button className="h-[52px] w-[52px] rounded-[10px] border-2 border-[#E8E8E8] flex items-center justify-center text-[20px] hover:border-[#2074c9] transition-colors duration-200" title="Favoritar">
               🤍
             </button>
           </div>
@@ -186,47 +153,28 @@ export default function ProductDetalhes() {
               </div>
             ))}
           </div>
-
         </div>
       </div>
 
       {related.length > 0 && (
         <div>
-          <h3 className="text-[#1F1F1F] font-extrabold text-[22px] mb-[24px]">
-            Jogos relacionados
-          </h3>
+          <h3 className="text-[#1F1F1F] font-extrabold text-[22px] mb-[24px]">Jogos relacionados</h3>
           <div className="grid grid-cols-4 gap-6">
             {related.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => navigate(`/produto/${item.id}`)}
-                className="cursor-pointer group"
-              >
+              <div key={item.id} onClick={() => navigate(`/produto/${item.id}`)} className="cursor-pointer group">
                 <div className="bg-white rounded-[12px] shadow-sm flex items-center justify-center p-4 aspect-square mb-3 transition-shadow duration-200 group-hover:shadow-md overflow-hidden">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    className="max-h-full max-w-full object-contain transition-transform duration-200 group-hover:scale-105"
-                  />
+                  <img src={item.imageUrl} alt={item.title} className="max-h-full max-w-full object-contain transition-transform duration-200 group-hover:scale-105" />
                 </div>
-                <span className="text-[#8F8F8F] text-[11px] font-bold uppercase tracking-wide">
-                  {item.category}
-                </span>
-                <h4 className="text-[#1F1F1F] font-bold text-[14px] mt-1 mb-1 line-clamp-2">
-                  {item.title}
-                </h4>
+                <span className="text-[#8F8F8F] text-[11px] font-bold uppercase tracking-wide">{item.category}</span>
+                <h4 className="text-[#1F1F1F] font-bold text-[14px] mt-1 mb-1 line-clamp-2">{item.title}</h4>
                 <p className="text-[#2074c9] font-extrabold text-[16px]">
-                  R${" "}
-                  {Number(item.price).toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                  })}
+                  R$ {Number(item.price).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
                 </p>
               </div>
             ))}
           </div>
         </div>
       )}
-
     </div>
   );
 }

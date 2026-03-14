@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 import { db } from "../firebase";
 import {
   collection,
@@ -15,8 +16,8 @@ import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import CartItem from "../Components/CartItem";
 
-// Substituir por auth.currentUser.uid quando implementar Firebase Auth
-const USER_ID = "user1";
+const user = auth.currentUser;
+const USER_ID = user?.uid;
 
 export default function Cart() {
   const navigate = useNavigate();
