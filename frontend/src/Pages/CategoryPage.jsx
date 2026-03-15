@@ -23,7 +23,6 @@ const CATEGORIES = [
 export default function CategoryPage() {
   const [counts, setCounts] = useState({});
 
-  // Busca contagem de jogos por console
   useEffect(() => {
     async function fetchCounts() {
       try {
@@ -49,7 +48,6 @@ export default function CategoryPage() {
 
         <BannerCategorias />
 
-        {/* Header */}
         <div className="mb-[28px]">
           <p className="text-[#2074c9] font-bold text-[13px] uppercase tracking-widest mb-1">
             Navegue por
@@ -59,7 +57,6 @@ export default function CategoryPage() {
           </h2>
         </div>
 
-        {/* Grid de categorias */}
         <div className="grid grid-cols-4 gap-6 mb-[80px]">
           {CATEGORIES.map((cat) => (
             <div key={cat.id} className="relative">
@@ -68,7 +65,6 @@ export default function CategoryPage() {
                 image={cat.img}
                 console={cat.consoleName}
               />
-              {/* Badge de quantidade */}
               {counts[cat.consoleName] !== undefined && (
                 <span className="absolute top-3 right-3 bg-[#E7FF86] text-black font-bold text-[11px] px-2 py-1 rounded-full">
                   {counts[cat.consoleName]} jogos
@@ -80,7 +76,6 @@ export default function CategoryPage() {
 
       </div>
 
-      {/* Produtos em alta */}
       <ProductHigh />
 
       <Footer />

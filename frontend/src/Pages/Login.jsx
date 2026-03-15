@@ -38,7 +38,6 @@ export default function Login() {
     <div className="bg-[#F9F8FE] min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-[420px]">
 
-        {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <Link to="/">
             <img src="/logo.png" alt="GameZone" width={64} className="mb-3" />
@@ -47,7 +46,6 @@ export default function Login() {
           <p className="text-[#8F8F8F] text-[14px] mt-1">Entre na sua conta</p>
         </div>
 
-        {/* Card */}
         <div className="bg-white rounded-[20px] shadow-sm p-8">
 
           {erro && (

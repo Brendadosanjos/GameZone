@@ -28,7 +28,6 @@ export default function ProductHigh() {
 
   return (
     <div className="px-[100px] mb-[100px]">
-      {/* Header */}
       <div className="flex items-center justify-between mb-[36px]">
         <div>
           <p className="text-[#2074c9] font-bold text-[13px] uppercase tracking-widest mb-1">

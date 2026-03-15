@@ -83,7 +83,6 @@ export default function SubscriptionPage() {
         status: "cancelled",
         cancelledAt: Timestamp.now(),
       });
-      // Atualiza isSubscriber no perfil
       await updateDoc(doc(db, "users", user.uid), {
         isSubscriber: false,
       });
@@ -106,7 +105,6 @@ export default function SubscriptionPage() {
         <p className="text-[#474747] text-[16px] max-w-[500px] mx-auto">Assine o plano Premium e ganhe um jogo grátis todo mês, descontos exclusivos e muito mais.</p>
       </div>
 
-      {/* Jogo do mês */}
       <div className="mx-auto max-w-[700px] mt-8 mb-4 px-4">
         <div className={`rounded-[16px] p-6 shadow-md ${isPremium ? "bg-[#2074c9]" : "bg-[#1F1F1F]"}`}>
           <div className="flex items-center justify-between gap-4">
@@ -175,7 +173,6 @@ export default function SubscriptionPage() {
         </div>
       )}
 
-      {/* Planos */}
       <div className="flex flex-wrap justify-center gap-8 mt-10 mb-[80px] px-4">
         {PLANS.map((plan) => {
           const isCurrentPlan = (plan.id === "premium" && isPremium) || (plan.id === "free" && !isPremium);
@@ -227,7 +224,6 @@ export default function SubscriptionPage() {
         })}
       </div>
 
-      {/* Benefícios */}
       <div className="bg-white py-[60px] px-4">
         <h2 className="text-center text-[#1F1F1F] font-extrabold text-[28px] mb-10">Por que ser Premium?</h2>
         <div className="flex flex-wrap justify-center gap-6 max-w-[900px] mx-auto">

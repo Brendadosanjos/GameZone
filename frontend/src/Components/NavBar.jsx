@@ -45,7 +45,6 @@ export default function NavBar() {
     <>
       <div className="flex flex-col pt-[34px] px-[100px] pb-[29px]">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          {/* Logo */}
           <Link
             to="/"
             className="flex items-center gap-[5px] text-[#2074c9] font-bold text-[28px] md:text-[36px] no-underline"
@@ -54,7 +53,6 @@ export default function NavBar() {
             <h1 className="whitespace-nowrap">GameZone</h1>
           </Link>
 
-          {/* Busca */}
           <form
             onSubmit={handleSearch}
             className="relative flex-1 min-w-[250px] max-w-[500px]"
@@ -74,10 +72,10 @@ export default function NavBar() {
             </button>
           </form>
 
-          {/* Ações */}
+
           <div className="flex items-center gap-4">
             {user ? (
-              /* Logado */
+
               <>
                 <div className="flex items-center gap-2">
                   <div className="w-[34px] h-[34px] rounded-full bg-[#2074c9] flex items-center justify-center text-white font-bold text-[14px]">
@@ -104,7 +102,7 @@ export default function NavBar() {
                 </button>
               </>
             ) : (
-              /* Deslogado */
+
               <>
                 <Link
                   to="/cadastro"
@@ -123,7 +121,6 @@ export default function NavBar() {
               </>
             )}
 
-            {/* Carrinho com badge */}
             <Link to="/carrinho" className="relative inline-flex items-center">
               <img src="/Buy.png" width={28} />
               {cartCount > 0 && (

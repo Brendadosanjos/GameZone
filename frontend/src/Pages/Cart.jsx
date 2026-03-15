@@ -25,7 +25,6 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
   const [finishing, setFinishing] = useState(false);
 
-  // Busca itens do carrinho no Firestore
   async function fetchCart() {
     try {
       const q = query(collection(db, "cart"), where("userId", "==", USER_ID));
@@ -48,7 +47,6 @@ export default function Cart() {
     0
   );
 
-  // Remove item do Firestore e do estado
   async function removeItem(docId) {
     try {
       await deleteDoc(doc(db, "cart", docId));
@@ -58,7 +56,6 @@ export default function Cart() {
     }
   }
 
-  // Limpa todos os itens do carrinho
   async function clearCart() {
     try {
       await Promise.all(
@@ -70,7 +67,6 @@ export default function Cart() {
     }
   }
 
-  // Redireciona para o checkout
   function finishOrder() {
     if (cartItems.length === 0) return;
     navigate("/checkout");
@@ -82,7 +78,6 @@ export default function Cart() {
 
       <div className="px-[100px] py-[40px]">
 
-        {/* Header */}
         <div className="mb-[36px]">
           <p className="text-[#2074c9] font-bold text-[13px] uppercase tracking-widest mb-1">
             Compras
@@ -92,14 +87,12 @@ export default function Cart() {
           </h1>
         </div>
 
-        {/* Loading */}
         {loading && (
           <div className="flex justify-center items-center h-[300px]">
             <p className="text-[#474747] text-[16px]">Carregando carrinho...</p>
           </div>
         )}
 
-        {/* Carrinho vazio */}
         {!loading && cartItems.length === 0 && (
           <div className="flex flex-col items-center justify-center h-[300px] gap-4">
             <span className="text-[56px]">🛒</span>
@@ -115,11 +108,9 @@ export default function Cart() {
           </div>
         )}
 
-        {/* Layout carrinho */}
         {!loading && cartItems.length > 0 && (
           <div className="flex gap-[40px] items-start">
 
-            {/* Lista de itens */}
             <div className="flex-1 flex flex-col gap-4">
               {cartItems.map((item) => (
                 <CartItem
@@ -137,7 +128,6 @@ export default function Cart() {
               </button>
             </div>
 
-            {/* Resumo */}
             <div className="w-[320px] shrink-0 bg-white rounded-[16px] p-6 shadow-sm">
               <h3 className="text-[#1F1F1F] font-extrabold text-[18px] mb-5">
                 Resumo do pedido

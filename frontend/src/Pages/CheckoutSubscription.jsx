@@ -56,7 +56,6 @@ export default function CheckoutSubscription() {
       const startDate = Timestamp.now();
       const endDate = Timestamp.fromDate(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000));
 
-      // Cria documento em subscriptions
       await addDoc(collection(db, "subscriptions"), {
         userId: user.uid,
         plan: "premium",
@@ -67,7 +66,6 @@ export default function CheckoutSubscription() {
         paymentMethod,
       });
 
-      // Atualiza isSubscriber no users
       await updateDoc(doc(db, "users", user.uid), {
         isSubscriber: true,
       });
@@ -106,10 +104,8 @@ export default function CheckoutSubscription() {
 
         <div className="flex gap-[40px] items-start">
 
-          {/* Formulário */}
           <div className="flex-1 flex flex-col gap-6">
 
-            {/* Método */}
             <div className="bg-white rounded-[16px] p-6 shadow-sm">
               <p className="text-[#1F1F1F] font-bold text-[16px] mb-4">Forma de pagamento</p>
               <div className="flex gap-3">
@@ -129,7 +125,6 @@ export default function CheckoutSubscription() {
               </div>
             </div>
 
-            {/* Cartão */}
             {paymentMethod === "cartao" && (
               <div className="bg-white rounded-[16px] p-6 shadow-sm flex flex-col gap-4">
                 <p className="text-[#1F1F1F] font-bold text-[16px]">Dados do cartão</p>
@@ -173,7 +168,6 @@ export default function CheckoutSubscription() {
               </div>
             )}
 
-            {/* PIX */}
             {paymentMethod === "pix" && (
               <div className="bg-white rounded-[16px] p-6 shadow-sm flex flex-col items-center gap-4">
                 <p className="text-[#1F1F1F] font-bold text-[16px] self-start">Pague via PIX</p>
@@ -190,7 +184,6 @@ export default function CheckoutSubscription() {
               </div>
             )}
 
-            {/* Boleto */}
             {paymentMethod === "boleto" && (
               <div className="bg-white rounded-[16px] p-6 shadow-sm flex flex-col gap-4">
                 <p className="text-[#1F1F1F] font-bold text-[16px]">Pague via Boleto</p>
@@ -211,7 +204,6 @@ export default function CheckoutSubscription() {
             )}
           </div>
 
-          {/* Resumo */}
           <div className="w-[320px] shrink-0">
             <div className="bg-white rounded-[16px] p-6 shadow-sm">
               <p className="text-[#1F1F1F] font-bold text-[16px] mb-4">Resumo da assinatura</p>

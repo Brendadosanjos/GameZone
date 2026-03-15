@@ -22,7 +22,6 @@ export default function ProductFilter() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortOption, setSortOption] = useState("relevance");
 
-  // Lê parâmetros da URL ao carregar (vindo da NavBar ou Footer)
   useEffect(() => {
     const searchParam = searchParams.get("search");
     const consoleParam = searchParams.get("console");
@@ -45,7 +44,6 @@ export default function ProductFilter() {
     fetchProducts();
   }, []);
 
-  // Categorias únicas vindas do Firebase
   const categories = [...new Set(products.map((p) => p.category).filter(Boolean))];
 
   function toggleCategory(cat) {
@@ -54,7 +52,6 @@ export default function ProductFilter() {
     );
   }
 
-  // Filtragem
   const filtered = products
     .filter((p) => {
       const matchSearch = p.title?.toLowerCase().includes(search.toLowerCase());
@@ -74,7 +71,6 @@ export default function ProductFilter() {
   return (
     <div className="bg-[#F9F8FE] min-h-screen px-[100px] py-[40px]">
 
-      {/* Header da página */}
       <div className="mb-[32px]">
         <p className="text-[#2074c9] font-bold text-[13px] uppercase tracking-widest mb-1">
           Produtos
@@ -84,7 +80,6 @@ export default function ProductFilter() {
         </h1>
       </div>
 
-      {/* Filtro por console (tabs) */}
       <div className="flex gap-3 mb-[32px] flex-wrap">
         {CONSOLES.map((c) => (
           <button
@@ -103,10 +98,8 @@ export default function ProductFilter() {
 
       <div className="flex gap-[40px]">
 
-        {/* Sidebar */}
         <aside className="w-[220px] shrink-0 flex flex-col gap-6">
 
-          {/* Busca */}
           <div>
             <p className="text-[#1F1F1F] font-bold text-[14px] mb-3">Buscar</p>
             <input
@@ -118,7 +111,6 @@ export default function ProductFilter() {
             />
           </div>
 
-          {/* Filtro por categoria */}
           {categories.length > 0 && (
             <div>
               <p className="text-[#1F1F1F] font-bold text-[14px] mb-3">Categoria</p>
@@ -143,7 +135,6 @@ export default function ProductFilter() {
             </div>
           )}
 
-          {/* Limpar filtros */}
           {(selectedCategories.length > 0 || selectedConsole !== "Todos" || search) && (
             <button
               onClick={() => {
@@ -158,10 +149,8 @@ export default function ProductFilter() {
           )}
         </aside>
 
-        {/* Conteúdo */}
         <div className="flex-1">
 
-          {/* Header de resultados */}
           <div className="flex items-center justify-between mb-[24px]">
             <p className="text-[#474747] text-[14px]">
               <span className="font-bold text-[#1F1F1F]">{filtered.length}</span> jogos encontrados
@@ -179,14 +168,12 @@ export default function ProductFilter() {
             </select>
           </div>
 
-          {/* Loading */}
           {loading && (
             <div className="flex justify-center items-center h-[300px]">
               <p className="text-[#474747] text-[16px]">Carregando jogos...</p>
             </div>
           )}
 
-          {/* Sem resultados */}
           {!loading && filtered.length === 0 && (
             <div className="flex flex-col items-center justify-center h-[300px] gap-3">
               <span className="text-[48px]">🎮</span>
@@ -195,7 +182,6 @@ export default function ProductFilter() {
             </div>
           )}
 
-          {/* Grid de jogos */}
           {!loading && filtered.length > 0 && (
             <div className="grid grid-cols-3 gap-6">
               {filtered.map((product) => (
@@ -204,7 +190,6 @@ export default function ProductFilter() {
                   onClick={() => navigate(`/produto/${product.id}`)}
                   className="bg-white rounded-[16px] shadow-sm overflow-hidden cursor-pointer group transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
                 >
-                  {/* Imagem */}
                   <div className="relative bg-[#F5F5F5] flex items-center justify-center h-[200px] overflow-hidden">
                     <img
                       src={product.imageUrl}
@@ -218,7 +203,6 @@ export default function ProductFilter() {
                     )}
                   </div>
 
-                  {/* Info */}
                   <div className="p-4">
                     <span className="text-[#8F8F8F] text-[11px] font-bold uppercase tracking-wide">
                       {product.category}
