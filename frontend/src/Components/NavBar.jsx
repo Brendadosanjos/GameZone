@@ -154,6 +154,12 @@ export default function NavBar() {
           </Link>
           <Link
             className="text-[#474747] hover:text-[#2074c9] no-underline"
+            to="/categorias"
+          >
+          Categorias
+          </Link>
+          <Link
+            className="text-[#474747] hover:text-[#2074c9] no-underline"
             to="/carrinho"
           >
             Carrinho
