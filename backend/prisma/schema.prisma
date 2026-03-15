@@ -8,99 +8,56 @@ datasource db {
 }
 
 model Usuario {
-  id          Int       @id @default(autoincrement())
-  name        String
-  cpf         String    @unique
-  email       String    @unique
-  celular     String
-  enderecoId  Int       @unique
-  endereco    Endereco  @relation(fields: [enderecoId], references: [id])
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  isSubscriber Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  pedidos      Pedido[]
+  assinatura   Assinatura?
 }
 
-model Categoria {
-  id        Int      @id @default(autoincrement())
-  descricao String
-  produtos  Produto[] // Relacionamento oposto adicionado
+model Jogo {
+  id          Int          @id @default(autoincrement())
+  title       String
+  category    String
+  console     String
+  description String
+  imageUrl    String
+  price       Float
+  releaseYear Int
+  stock       Int          @default(0)
+  itensPedido ItemPedido[]
 }
 
-model Status {
-  id       Int       @id @default(autoincrement())
-  nome     String
-  pedidos  Pedidos[] // Relacionamento oposto adicionado
+model Pedido {
+  id            Int          @id @default(autoincrement())
+  usuarioId     Int
+  total         Float
+  status        String       @default("Aguardando entrega")
+  paymentMethod String
+  createdAt     DateTime     @default(now())
+  usuario       Usuario      @relation(fields: [usuarioId], references: [id])
+  items         ItemPedido[]
 }
 
-model Genero {
-  id       Int       @id @default(autoincrement())
-  nome     String
-  produtos Produto[]  // Relacionamento oposto adicionado
+model ItemPedido {
+  id       Int    @id @default(autoincrement())
+  pedidoId Int
+  jogoId   Int
+  quantity Int    @default(1)
+  price    Float
+  pedido   Pedido @relation(fields: [pedidoId], references: [id])
+  jogo     Jogo   @relation(fields: [jogoId], references: [id])
 }
 
-model Promocao {
-  id          Int      @id @default(autoincrement())
-  nome        String
-  percentagem Float
-  produtos    Produto[] // Relacionamento oposto adicionado
-}
-
-model Marca {
-  id       Int       @id @default(autoincrement())
-  nome     String
-  produtos Produto[]  // Relacionamento oposto adicionado
-}
-
-model Estado {
-  id       Int       @id @default(autoincrement())
-  nome     String
-  produtos Produto[]  // Relacionamento oposto adicionado
-}
-
-model Cupom {
-  id          Int      @id @default(autoincrement())
-  nome        String
-  percentagem Float
-  pedidos     Pedidos[] // Relacionamento oposto adicionado
-}
-
-model FormaPagamento {
-  id   Int    @id @default(autoincrement())
-  nome String
-}
-
-model Endereco {
-  id          Int      @id @default(autoincrement())
-  rua         String
-  bairro      String
-  cidade      String
-  cep         String
-  complemento String?
-  usuario     Usuario?  // Relacionamento oposto adicionado
-}
-
-model Pedidos {
-  id         Int      @id @default(autoincrement())
-  descricao  String
-  statusId   Int
-  precoTotal Float
-  cupomId    Int?
-
-  status Status @relation(fields: [statusId], references: [id])
-  cupom  Cupom? @relation(fields: [cupomId], references: [id])
-}
-
-model Produto {
-  id          Int      @id @default(autoincrement())
-  nome        String
-  descricao   String
-  categoriaId Int
-  generoId    Int
-  estadoId    Int
-  preco       Float
-  promocaoId  Int?
-  marcaId     Int
-
-  categoria Categoria @relation(fields: [categoriaId], references: [id])
-  genero    Genero    @relation(fields: [generoId], references: [id])
-  estado    Estado    @relation(fields: [estadoId], references: [id])
-  promocao  Promocao? @relation(fields: [promocaoId], references: [id])
-  marca     Marca     @relation(fields: [marcaId], references: [id])
+model Assinatura {
+  id            Int      @id @default(autoincrement())
+  usuarioId     Int      @unique
+  plan          String
+  status        String
+  startDate     DateTime
+  endDate       DateTime
+  paymentMethod String
+  usuario       Usuario  @relation(fields: [usuarioId], references: [id])
 }
