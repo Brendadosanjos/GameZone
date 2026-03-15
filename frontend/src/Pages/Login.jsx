@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const navigate = useNavigate();
   const auth = getAuth();
+  const location = useLocation();
+
+const from = location.state?.from || "/";
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [erro, setErro] = useState("");
@@ -14,25 +17,30 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setErro("");
-    setLoading(true);
-    try {
-      await signInWithEmailAndPassword(auth, form.email, form.password);
-      navigate("/");
-    } catch (error) {
-      const messages = {
-        "auth/user-not-found": "E-mail não encontrado.",
-        "auth/wrong-password": "Senha incorreta.",
-        "auth/invalid-email": "E-mail inválido.",
-        "auth/too-many-requests": "Muitas tentativas. Tente novamente mais tarde.",
-      };
-      setErro(messages[error.code] || "Não foi possível fazer login.");
-    } finally {
-      setLoading(false);
-    }
+async function handleSubmit(e) {
+  e.preventDefault();
+  setErro("");
+  setLoading(true);
+
+  try {
+    await signInWithEmailAndPassword(auth, form.email, form.password);
+
+    navigate(from, { replace: true });
+
+  } catch (error) {
+    const messages = {
+      "auth/user-not-found": "E-mail não encontrado.",
+      "auth/wrong-password": "Senha incorreta.",
+      "auth/invalid-email": "E-mail inválido.",
+      "auth/too-many-requests": "Muitas tentativas. Tente novamente mais tarde.",
+    };
+
+    setErro(messages[error.code] || "Não foi possível fazer login.");
+
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <div className="bg-[#F9F8FE] min-h-screen flex items-center justify-center px-4">

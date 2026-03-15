@@ -38,25 +38,30 @@ export default function ProductDetalhes() {
     fetchProduct();
   }, [id]);
 
-  async function handleAddToCart() {
-    if (!user?.uid) return;
-    try {
-      await addDoc(collection(db, "cart"), {
-        userId: user.uid,
-        gameId: product.id,
-        title: product.title,
-        price: product.price,
-        imageUrl: product.imageUrl,
-        console: product.console,
-        category: product.category,
-        quantity: 1,
-      });
-      setAdded(true);
-      setTimeout(() => setAdded(false), 2000);
-    } catch (error) {
-      console.error("Erro ao adicionar ao carrinho:", error);
-    }
+async function handleAddToCart() {
+  if (!user?.uid) {
+    navigate("/login", { state: { from: `/produto/${id}` } });
+    return;
   }
+
+  try {
+    await addDoc(collection(db, "cart"), {
+      userId: user.uid,
+      gameId: product.id,
+      title: product.title,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      console: product.console,
+      category: product.category,
+      quantity: 1,
+    });
+
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  } catch (error) {
+    console.error("Erro ao adicionar ao carrinho:", error);
+  }
+}
 
   if (loading) {
     return (

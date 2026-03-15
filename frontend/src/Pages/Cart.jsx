@@ -4,20 +4,17 @@ import { auth } from "../firebase";
 import { db } from "../firebase";
 import {
   collection,
-  addDoc,
   getDocs,
   deleteDoc,
   doc,
   query,
   where,
-  Timestamp,
 } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import CartItem from "../Components/CartItem";
-
-const user = auth.currentUser;
-const USER_ID = user?.uid;
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -25,11 +22,16 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
   const [finishing, setFinishing] = useState(false);
 
-  async function fetchCart() {
+  async function fetchCart(uid) {
     try {
-      const q = query(collection(db, "cart"), where("userId", "==", USER_ID));
+      const q = query(collection(db, "cart"), where("userId", "==", uid));
       const snap = await getDocs(q);
-      const items = snap.docs.map((d) => ({ docId: d.id, ...d.data() }));
+
+      const items = snap.docs.map((d) => ({
+        docId: d.id,
+        ...d.data(),
+      }));
+
       setCartItems(items);
     } catch (err) {
       console.error("Erro ao buscar carrinho:", err);
@@ -39,7 +41,16 @@ export default function Cart() {
   }
 
   useEffect(() => {
-    fetchCart();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate("/login");
+        return;
+      }
+
+      fetchCart(user.uid);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const subtotal = cartItems.reduce(
@@ -77,7 +88,6 @@ export default function Cart() {
       <NavBar />
 
       <div className="px-[100px] py-[40px]">
-
         <div className="mb-[36px]">
           <p className="text-[#2074c9] font-bold text-[13px] uppercase tracking-widest mb-1">
             Compras
@@ -89,7 +99,9 @@ export default function Cart() {
 
         {loading && (
           <div className="flex justify-center items-center h-[300px]">
-            <p className="text-[#474747] text-[16px]">Carregando carrinho...</p>
+            <p className="text-[#474747] text-[16px]">
+              Carregando carrinho...
+            </p>
           </div>
         )}
 
@@ -99,6 +111,7 @@ export default function Cart() {
             <p className="text-[#474747] font-semibold text-[18px]">
               Seu carrinho está vazio.
             </p>
+
             <button
               onClick={() => navigate("/productlist")}
               className="bg-[#2074c9] hover:bg-[#1a5faa] text-white font-bold text-[14px] px-8 py-3 rounded-[10px] transition-colors duration-200"
@@ -135,11 +148,19 @@ export default function Cart() {
 
               <div className="flex flex-col gap-3 mb-5">
                 <div className="flex justify-between text-[14px] text-[#474747]">
-                  <span>Subtotal ({cartItems.length} {cartItems.length === 1 ? "item" : "itens"})</span>
                   <span>
-                    R$ {subtotal.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                    Subtotal ({cartItems.length}{" "}
+                    {cartItems.length === 1 ? "item" : "itens"})
+                  </span>
+
+                  <span>
+                    R${" "}
+                    {subtotal.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                    })}
                   </span>
                 </div>
+
                 <div className="flex justify-between text-[14px] text-[#474747]">
                   <span>Entrega</span>
                   <span className="text-green-600 font-semibold">Grátis</span>
@@ -148,9 +169,15 @@ export default function Cart() {
 
               <div className="border-t border-[#E8E8E8] pt-4 mb-5">
                 <div className="flex justify-between">
-                  <span className="text-[#1F1F1F] font-extrabold text-[16px]">Total</span>
+                  <span className="text-[#1F1F1F] font-extrabold text-[16px]">
+                    Total
+                  </span>
+
                   <span className="text-[#2074c9] font-extrabold text-[20px]">
-                    R$ {subtotal.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                    R${" "}
+                    {subtotal.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                    })}
                   </span>
                 </div>
               </div>
@@ -173,7 +200,6 @@ export default function Cart() {
 
           </div>
         )}
-
       </div>
 
       <Footer />

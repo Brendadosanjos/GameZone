@@ -39,17 +39,17 @@ export default function Cards() {
             key={i}
             className="relative rounded-[16px] bg-[#D8E3F2] pl-[28px] pt-[30px] pb-[28px] flex-1 min-h-[260px] overflow-hidden transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
           >
-            {/* Badge */}
+  
             <span className="inline-block bg-[#E7FF86] text-black font-bold text-[12px] px-4 py-1 rounded-full uppercase tracking-wide mb-3">
               {promo.badge}
             </span>
 
-            {/* Title */}
+            
             <h2 className="text-[#1F1F1F] font-extrabold text-[28px] leading-[1.2] whitespace-pre-line mb-5">
               {promo.title}
             </h2>
 
-            {/* Button */}
+           
             <button
               onClick={() => navigate(promo.to)}
               className="bg-[#2074c9] hover:bg-[#1a5faa] transition-colors duration-200 text-white font-bold text-[13px] px-6 py-2 rounded-[8px] z-10 relative"
@@ -57,7 +57,7 @@ export default function Cards() {
               Comprar
             </button>
 
-            {/* Image */}
+            
             <img src={promo.image} alt={promo.title} className={promo.imageClass} />
           </div>
         ))}

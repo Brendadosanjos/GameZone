@@ -15,6 +15,8 @@ import Login from "./Pages/Login";
 import Cadastro from "./Pages/Cadastro";
 import CheckoutSubscription from "./Pages/CheckoutSubscription";
 
+import ProtectedRoute from "./Components/ProtectedRoute";
+
 
 function App() {
   return (
@@ -25,14 +27,50 @@ function App() {
           <Route path="/productlist" element={<ProductList />} />
           <Route path="/produto/:id" element={<ProductPage />} />
           <Route path="/assinatura" element={<SubscriptionPage />} />
-          <Route path="/carrinho" element={<Cart />} />
-          <Route path="/pedidos" element={<Orders />} />
           <Route path="/categorias" element={<CategoryPage />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/checkout" element={<Checkout />} />
+
+          {/* Rotas protegidas */}
+          <Route
+            path="/carrinho"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/pedidos"
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/checkout-assinatura"
+            element={
+              <ProtectedRoute>
+                <CheckoutSubscription />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Rotas públicas */}
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/checkout-assinatura" element={<CheckoutSubscription />} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>
