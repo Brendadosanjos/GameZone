@@ -7,22 +7,17 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 import "../Styles/Navbar.css";
 
-const USER_ID = "user1";
-
 export default function NavBar() {
   const { user, profile, logout } = useAuth();
   const navigate = useNavigate();
   const [cartCount, setCartCount] = useState(0);
 
-  const userId = user?.uid || USER_ID;
-
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "cart"), (snap) => {
-      setCartCount(snap.size);
-    });
-
+    if (!user?.uid) { setCartCount(0); return; }
+    const q = query(collection(db, "cart"), where("userId", "==", user.uid));
+    const unsubscribe = onSnapshot(q, (snap) => setCartCount(snap.size));
     return () => unsubscribe();
-  }, []);
+  }, [user?.uid]);
 
   async function handleLogout() {
     await logout();
@@ -72,27 +67,24 @@ export default function NavBar() {
             </button>
           </form>
 
-
           <div className="flex items-center gap-4">
             {user ? (
-
               <>
-                <div className="flex items-center gap-2">
+                {/* Avatar clicável que leva para editar perfil */}
+                <Link to="/perfil" className="flex items-center gap-2 no-underline">
                   <div className="w-[34px] h-[34px] rounded-full bg-[#2074c9] flex items-center justify-center text-white font-bold text-[14px]">
                     {firstName?.[0]?.toUpperCase() || "U"}
                   </div>
                   <div className="flex flex-col leading-tight">
                     <span className="text-[#8F8F8F] text-[11px]">Olá,</span>
-                    <span className="text-[#1F1F1F] font-bold text-[14px]">
-                      {firstName}
-                    </span>
+                    <span className="text-[#1F1F1F] font-bold text-[14px]">{firstName}</span>
                   </div>
                   {profile?.isSubscriber && (
                     <span className="bg-[#E7FF86] text-black text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
                       Premium
                     </span>
                   )}
-                </div>
+                </Link>
 
                 <button
                   onClick={handleLogout}
@@ -102,7 +94,6 @@ export default function NavBar() {
                 </button>
               </>
             ) : (
-
               <>
                 <Link
                   to="/cadastro"
@@ -133,42 +124,15 @@ export default function NavBar() {
         </div>
 
         <div className="flex flex-wrap gap-[32px] mt-[40px] mb-[21px]">
-          <Link
-            className="text-[#474747] hover:text-[#2074c9] no-underline"
-            to="/"
-          >
-            Home
-          </Link>
-          <Link
-            className="text-[#474747] hover:text-[#2074c9] no-underline"
-            to="/assinatura"
-          >
-            Assinatura
-          </Link>
-          <Link
-            className="text-[#474747] hover:text-[#2074c9] no-underline"
-            to="/productlist"
-          >
-            Produtos
-          </Link>
-          <Link
-            className="text-[#474747] hover:text-[#2074c9] no-underline"
-            to="/categorias"
-          >
-          Categorias
-          </Link>
-          <Link
-            className="text-[#474747] hover:text-[#2074c9] no-underline"
-            to="/carrinho"
-          >
-            Carrinho
-          </Link>
-          <Link
-            className="text-[#474747] hover:text-[#2074c9] no-underline"
-            to="/pedidos"
-          >
-            Meus pedidos
-          </Link>
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/">Home</Link>
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/assinatura">Assinatura</Link>
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/productlist">Produtos</Link>
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/categorias">Categorias</Link>
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/carrinho">Carrinho</Link>
+          <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/pedidos">Meus pedidos</Link>
+          {user && (
+            <Link className="text-[#474747] hover:text-[#2074c9] no-underline" to="/perfil">Meu perfil</Link>
+          )}
         </div>
       </div>
     </>
