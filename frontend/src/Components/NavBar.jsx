@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { useAuth } from "../Context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import "../Styles/NavBar.css";
 
 const USER_ID = "user1";

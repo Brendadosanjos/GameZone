@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import Cards from "../Components/Cards";
 import CarrouselHome from "../Components/CarouselHome";
 import Footer from "../Components/Footer";
