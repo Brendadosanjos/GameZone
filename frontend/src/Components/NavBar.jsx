@@ -132,7 +132,6 @@ export default function NavBar() {
           </div>
         </div>
 
-        {/* Menu */}
         <div className="flex flex-wrap gap-[32px] mt-[40px] mb-[21px]">
           <Link
             className="text-[#474747] hover:text-[#2074c9] no-underline"
