@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
-import "../Styles/NavBar.css";
+import "../Styles/Navbar.css";
 
 const USER_ID = "user1";
 
