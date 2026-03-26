@@ -1,152 +1,130 @@
+# 🎮 GameZone
 
-# React Project
+Plataforma de jogos digitais desenvolvida como projeto acadêmico para a disciplina de **Desenvolvimento de Software em Nuvem** — ADS / IA EAD — Unifor.
 
-Bem-vindo ao projeto! Este documento irá guiá-lo pelos passos necessários para clonar, configurar e executar a aplicação localmente.
+## 🔗 Links
 
-## Requisitos
+| Recurso | URL |
+|---|---|
+| 🌐 Frontend | [game-zone-nckmq1m55-brendadosanjos-projects.vercel.app](https://game-zone-nckmq1m55-brendadosanjos-projects.vercel.app) |
+| ⚙️ Backend API | [gamezone-production-ed79.up.railway.app](https://gamezone-production-ed79.up.railway.app) |
+| 📄 Swagger | [gamezone-production-ed79.up.railway.app/api-docs](https://gamezone-production-ed79.up.railway.app/api-docs) |
+| 📁 Repositório | [github.com/Brendadosanjos/GameZone](https://github.com/Brendadosanjos/GameZone) |
 
-Certifique-se de ter as seguintes ferramentas instaladas no seu ambiente de desenvolvimento:
+---
 
-- [Node.js](https://nodejs.org/) (versão recomendada: LTS)
-- [npm](https://www.npmjs.com/)
-- [Git](https://git-scm.com/) para clonar o repositório
+## 📋 Sobre o Projeto
 
-## Passos para configurar o projeto
+O GameZone é uma loja de jogos digitais com sistema de autenticação, carrinho de compras, histórico de pedidos e plano de assinatura Premium. A aplicação utiliza arquitetura híbrida em nuvem: Firebase para dados em tempo real no frontend e uma API REST containerizada para o backend.
 
-1. **Clone o repositório**
+### Funcionalidades
 
-   Abra o terminal e execute o seguinte comando:
+- 🔐 Autenticação com Firebase Auth (login, cadastro, logout)
+- 🎮 Catálogo de jogos com filtros por console, categoria e busca
+- 🛒 Carrinho de compras persistido por usuário
+- 💳 Checkout com cartão, PIX e boleto
+- 📦 Histórico de pedidos em tempo real
+- ⭐ Assinatura Premium com jogo gratuito do mês
+- 👤 Edição de perfil (nome, e-mail e senha)
+- 📄 API REST documentada com Swagger
+- 🐳 Backend containerizado com Docker
 
-   ```bash
-   git clone <URL_DO_REPOSITORIO>
-   ```
+---
 
-   Substitua `<URL_DO_REPOSITORIO>` pelo link do repositório do projeto.
-
-2. **Acesse o diretório do projeto**
-
-   ```bash
-   cd <NOME_DO_DIRETORIO>
-   ```
-
-   Substitua `<NOME_DO_DIRETORIO>` pelo nome do diretório onde o projeto foi clonado.
-
-3. **Instale as dependências**
-
-   Se você usa `npm`, execute:
-
-   ```bash
-   npm install
-   ```
-
-5. **Inicie o servidor de desenvolvimento**
-
-   Para iniciar o projeto em modo de desenvolvimento, execute:
-
-   ```bash
-   npm run dev
-   ```
-
-   O projeto estará disponível no navegador no endereço [http://localhost:5173](http://localhost:5173) (por padrão).
-
-
-## Estrutura do Projeto
-
-Uma visão geral da estrutura do projeto:
+## 🏗️ Arquitetura
 
 ```
-.
-├── public/             # Arquivos públicos (HTML, imagens, etc.)
-├── src/                # Código fonte do projeto
-│   ├── Components/     # Componentes reutilizáveis
-│   ├── pages/          # Páginas principais
-│   └── App.js          # Componente principal
-├── package.json        # Gerenciador de dependências
-└── README.md           # Este arquivo
+┌─────────────────────────────────────────────────────┐
+│                   USUÁRIO (Browser)                  │
+└────────────────────────┬────────────────────────────┘
+                         │ HTTPS
+┌────────────────────────▼────────────────────────────┐
+│           FRONTEND — React + Vite                    │
+│           Deploy: Vercel                             │
+└───────────┬────────────────────────┬────────────────┘
+            │ Firebase SDK           │ REST API
+┌───────────▼──────────┐  ┌─────────▼──────────────────┐
+│ FIREBASE             │  │ BACKEND — Node.js + Express │
+│ Auth + Firestore     │  │ Deploy: Railway             │
+│ Google Cloud (BaaS)  │  │ Docker Container            │
+└──────────────────────┘  └─────────┬──────────────────┘
+                                    │
+                          ┌─────────▼──────────────────┐
+                          │ PostgreSQL (Railway)        │
+                          └────────────────────────────┘
+                                    │
+┌───────────────────────────────────▼────────────────────┐
+│              CI/CD — GitHub Actions                     │
+│              Build → Testes → Deploy (Vercel)           │
+└────────────────────────────────────────────────────────┘
 ```
 
-## Contribuindo
+---
 
-Se você deseja contribuir com este projeto, siga os passos abaixo:
+## 📁 Estrutura do Repositório
 
-1. Crie uma nova branch:
-
-   ```bash
-   git checkout -b minha-feature
-   ```
-
-2. Faça suas alterações e adicione os commits:
-
-   ```bash
-   git commit -m "Descrição das mudanças"
-   ```
-
-3. Envie sua branch para o repositório remoto:
-
-   ```bash
-   git push origin minha-feature
-   ```
-
-4. Abra um Pull Request no GitHub.
-=======
-# 🎮 GameZone - Aplicação Web em Nuvem
-
-Projeto desenvolvido como atividade final da disciplina **Desenvolvimento de Software em Nuvem** do curso de **Análise e Desenvolvimento de Sistemas / Inteligência Artificial – UNIFOR**.
-
-A aplicação consiste em um **catálogo de jogos digitais**, permitindo visualizar jogos disponíveis, consultar detalhes e realizar operações de gerenciamento através de uma API REST.
+```
+GameZone/
+├── frontend/          # Aplicação React + Vite
+│   ├── src/
+│   │   ├── Components/
+│   │   ├── Context/
+│   │   ├── Pages/
+│   │   └── firebase.js
+│   ├── .env.example
+│   └── package.json
+├── backend/           # API REST Node.js
+│   ├── prisma/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── routes/
+│   │   └── services/
+│   ├── Dockerfile
+│   ├── app.js
+│   └── package.json
+├── docker-compose.yml
+└── .github/
+    └── workflows/     # CI/CD GitHub Actions
+```
 
 ---
 
-# 📌 Objetivo do Projeto
+## 🚀 Como Rodar Localmente
 
-Desenvolver e implantar uma aplicação web utilizando **arquitetura em camadas**, serviços em nuvem, containers e práticas básicas de **DevOps**, garantindo escalabilidade, organização e boas práticas de desenvolvimento.
+### Pré-requisitos
 
----
+- Node.js 20+
+- Docker e Docker Compose
+- Conta no Firebase
 
-# 🧱 Arquitetura da Aplicação
+### Frontend
 
-A aplicação segue o modelo **cliente-servidor**:
+```bash
+cd frontend
+npm install
+cp .env.example .env
+# Preencha as variáveis do Firebase no .env
+npm run dev
+```
 
-Frontend → Interface do usuário  
-Backend → API REST responsável pela lógica da aplicação  
-Banco de Dados → Armazenamento persistente em PostgreSQL
+### Backend (com Docker)
 
+```bash
+docker-compose up --build
+```
 
----
-
-
-### Divirta-se codando! 🚀
-
-# 🚀 Tecnologias Utilizadas
-
-## Frontend
-- React
-- Vite
-- JavaScript
-- CSS
-
-## Backend
-- Node.js
-- Express
-- Prisma ORM
-
-## Banco de Dados
-- PostgreSQL
-
-## DevOps e Cloud
-- Docker (containerização do backend)
-- GitHub (controle de versão)
-- Vercel (deploy do frontend)
-- Render (deploy do backend)
+A API estará disponível em `http://localhost:3000` e o Swagger em `http://localhost:3000/api-docs`.
 
 ---
 
-# 🎮 Funcionalidades
+## 🛠️ Tecnologias
 
-### Usuário
-- Visualização de catálogo de jogos
-- Consulta de detalhes dos jogos
-- Filtro por categorias
-- Filtro por plataforma
+**Frontend:** React, Vite, Tailwind CSS, Bootstrap, Firebase Auth, Firestore
 
+**Backend:** Node.js, Express, Prisma, PostgreSQL, Swagger UI, Docker
 
+**DevOps:** GitHub Actions, Vercel, Railway, Docker Compose
+
+---
+
+*Unifor — ADS / IA EAD — 2026*
