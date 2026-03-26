@@ -44,6 +44,10 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("GameZone API está online 🚀");
+});
+
 // ─── Swagger ─────────────────────────────────────────────────────────────────
 const swaggerDocument = {
   openapi: "3.0.0",
